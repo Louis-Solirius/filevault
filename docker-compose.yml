@@ -1,13 +1,12 @@
 services:
-  azure-sa:
+  app:
     build:
-      context: ../..
+      context: .
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      NODE_ENV: production
     volumes:
       - .:/src/azure-sa
-      - /src/azure-sa/node_modules
-    restart: unless-stopped
+    container_name: nodejs
+    restart: always
+    ports:
+      - "3000:3000"
+    command: npm start
