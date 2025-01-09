@@ -9,7 +9,7 @@ RUN id
 
 WORKDIR /src/azure-sa
 
-COPY --chown=nonroot:nonroot package*.json ./
+COPY --chown=root:root --chmod=755 package*.json ./
 
 RUN npm install --ignore-scripts
 
