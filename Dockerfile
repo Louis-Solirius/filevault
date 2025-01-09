@@ -1,15 +1,15 @@
-FROM alpine
+FROM node:20-alpine
 
 RUN addgroup -S nonroot \
     && adduser -S nonroot -G nonroot
 
 USER nonroot
 
-ENTRYPOINT ["id"]
+RUN id
 
 WORKDIR /src/azure-sa
 
-COPY package*.json ./
+COPY --chown=nonroot:nonroot package*.json ./
 
 RUN npm install --ignore-scripts
 
