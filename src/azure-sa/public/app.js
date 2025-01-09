@@ -66,6 +66,7 @@ async function loadFiles() {
     notesList.appendChild(table);
 }
 
+/* eslint-disable */
 async function deleteFile(fileKey) {
     const response = await fetch(`/files/${fileKey}`, {
         method: 'DELETE',
@@ -78,6 +79,7 @@ async function deleteFile(fileKey) {
         alert('Failed to delete file.');
     }
 }
+/* eslint-enable */
 
 document.addEventListener('DOMContentLoaded', loadFiles);
 
