@@ -7,9 +7,13 @@ require('dotenv').config();
 const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
 
 const app = express();
+app.disable("x-powered-by");
+
 const PORT = process.env.PORT || 3000;
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'uploads/', limits: {
+        fileSize: 8000000 // <- Compliant: 8MB
+    } });
 
 const sharedKeyCredential = new StorageSharedKeyCredential(
     process.env.AZURE_STORAGE_ACCOUNT_NAME,

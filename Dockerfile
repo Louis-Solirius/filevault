@@ -1,12 +1,19 @@
-FROM node:20-alpine
+FROM alpine
+
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
+
+USER nonroot
+
+ENTRYPOINT ["id"]
 
 WORKDIR /src/azure-sa
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --ignore-scripts
 
-COPY . .
+COPY ./src ./
 
 EXPOSE 3000
 
