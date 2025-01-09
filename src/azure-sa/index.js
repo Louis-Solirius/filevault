@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 3000;
 const upload = multer({ dest: 'uploads/', limits: {
         fileSize: 8000000 // <- Compliant: 8MB
     } });
-console.log(process.env.AZURE_STORAGE_ACCOUNT_NAME, process.env.AZURE_STORAGE_ACCOUNT_KEY, process.env.AZURE_CONTAINER_NAME);
 
 const sharedKeyCredential = new StorageSharedKeyCredential(
     process.env.AZURE_STORAGE_ACCOUNT_NAME,

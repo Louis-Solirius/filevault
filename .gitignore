@@ -33,3 +33,8 @@ filesData.json
 
 # JetBrains
 .idea
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+/terraform/.terraform/
