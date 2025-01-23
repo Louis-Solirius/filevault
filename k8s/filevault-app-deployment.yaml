@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filevault-app-deployment
+  labels:
+    app: filevault-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filevault-app
+  template:
+    metadata:
+      labels:
+        app: filevault-app
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: filevault-app
+          image: lwweaponofchoicecr.azurecr.io/filevault-app:latest
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: filevault-app-service
+  labels:
+    app: filevault-app
+spec:
+  selector:
+    app: filevault-app
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
