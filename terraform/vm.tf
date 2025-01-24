@@ -8,6 +8,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
     azurerm_network_interface.vm_nic.id
   ]
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   admin_ssh_key {
     username   = var.vm_admin_username
     public_key = file("~/.ssh/id_ed25519.pub")
