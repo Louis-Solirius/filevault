@@ -16,7 +16,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
   name     = "lw-weaponofchoice-rg"
-  location = "uksouth"
+  location = var.location
 }
 
 resource "azurerm_container_registry" "acr" {

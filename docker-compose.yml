@@ -1,8 +1,9 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: filevault-app-clean
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
     volumes:
       - .:/src/azure-sa
     container_name: nodejs

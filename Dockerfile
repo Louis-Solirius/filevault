@@ -7,13 +7,13 @@ USER nonroot
 
 RUN id
 
-WORKDIR /src/azure-sa
+WORKDIR /app
 
 COPY --chown=nonroot:nonroot --chmod=755 package*.json ./
 
 RUN npm install --ignore-scripts
 
-COPY ./src ./
+COPY --chown=nonroot:nonroot ./ ./
 
 EXPOSE 3000
 
