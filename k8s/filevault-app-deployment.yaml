@@ -18,8 +18,12 @@ spec:
       containers:
         - name: filevault-app
           image: lwweaponofchoicecr.azurecr.io/filevault-app:latest
+          resources:
+            limits:
+              memory: 100Mi
           ports:
             - containerPort: 80
+      automountServiceAccountToken: false
 ---
 apiVersion: v1
 kind: Service

@@ -38,6 +38,8 @@ filesData.json
 *.tfstate
 *.tfstate.backup
 /terraform/.terraform/
+secret.auto.tfvars
+terraform.tfvars
 
 # Ansible
 /ansible/inventory/*.ini
