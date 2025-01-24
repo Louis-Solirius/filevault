@@ -1,6 +1,6 @@
 # FileVault
 
-[![CI](https://github.com/Louis-Solirius/filevault/actions/workflows/ci-pipeline.yml/badge.svg?event=push)]([https://github.com/Louis-Solirius/filevault/actions/workflows/ci-pipeline.yml])
+[![CI](https://github.com/Louis-Solirius/filevault/actions/workflows/ci-pipeline.yml/badge.svg?event=push)](https://github.com/Louis-Solirius/filevault/actions/workflows/ci-pipeline.yml)
 
 FileVault is a modern file uploading application with versions for both AWS S3 and Azure Blob Storage. It features a clean interface with light/dark mode toggle and file management capabilities.
 
