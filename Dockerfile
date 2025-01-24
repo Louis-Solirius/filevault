@@ -13,7 +13,7 @@ COPY --chown=nonroot:nonroot --chmod=755 package*.json ./
 
 RUN npm install --ignore-scripts
 
-COPY --chown=nonroot:nonroot --chmod=755 ./src ./
+COPY --chown=root:root --chmod=755 ./src ./
 
 EXPOSE 3000
 
