@@ -57,11 +57,12 @@ resource "azurerm_service_plan" "asp" {
   sku_name            = "B1"
 }
 
-resource "azurerm_app_service" "webapp" {
+resource "azurerm_app_service" "webapp" { //NOSONAR
   name                = "louisw-fault-vault-web-app"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id     = azurerm_service_plan.asp.id
+  https_only = true
   app_settings = {
     DOCKER_REGISTRY_SERVER_URL          = azurerm_container_registry.acr.login_server
     DOCKER_REGISTRY_SERVER_USERNAME     = azurerm_container_registry.acr.admin_username
@@ -75,6 +76,11 @@ resource "azurerm_app_service" "webapp" {
 
   site_config {
     linux_fx_version = "DOCKER|${azurerm_container_registry.acr.login_server}/filevault-app-clean:latest"
+  }
+
+  auth_settings {
+    enabled = true
+    unauthenticated_client_action = "RedirectToLoginPage"
   }
 }
 
