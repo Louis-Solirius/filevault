@@ -92,7 +92,7 @@ jobs:
       - name: Run Ansible Playbook
         uses: dawidd6/action-ansible-playbook@v3
         with:
-          playbook: filevault-docker-setup.yml
+          playbook: ansible/playbooks/filevault-docker-setup.yml
 #          directory: ansible
           inventory: |
             [filevault-app-servers]
