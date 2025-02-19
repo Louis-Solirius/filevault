@@ -2,7 +2,10 @@ const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const client = require('prom-client');
 require('dotenv').config();
+
+client.collectDefaultMetrics();
 
 const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
 
@@ -45,6 +48,11 @@ let files = loadFilesData();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+
+app.get('/metrics', (req, res) => {
+    res.set('Content-Type', client.register.contentType);
+    res.end(client.register.metrics());
+});
 
 app.post('/upload', upload.single('file'), async (req, res) => {
     const fileName = req.body.note;

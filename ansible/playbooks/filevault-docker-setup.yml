@@ -1,5 +1,5 @@
 ---
-- name: Set up Docker and run filevault container
+- name: Set up Docker and deploy the FileVault stack with Docker Compose
   hosts: filevault-app-servers
   become: yes
 
@@ -7,28 +7,80 @@
     - ../vault.yml
 
   vars:
+    deploy_dir: /opt/filevault
     acr_login_server: "lwweaponofchoicecr.azurecr.io"
     acr_username: "lwweaponofchoicecr"
     container_name: "filevault-app-clean"
     container_port: 3000
     host_port: 8080
+    prometheus_host_port: 9090
+    grafana_host_port: 3001
 
   tasks:
-    - name: Ensure Docker is installed
-      apt:
-        name: docker.io
-        state: present
-        update_cache: yes
+    - name: Install aptitude
+      ansible.builtin.apt:
+        name: aptitude
+        state: latest
+        update_cache: true
 
-    - name: Ensure pip is installed
-      apt:
-        name: pip
-        state: present
-        update_cache: yes
+    - name: Install required system packages
+      ansible.builtin.apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
 
-    - name: Install Docker python module
-      pip:
-        name: docker
+    - name: Add Docker GPG apt Key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Install docker-ce
+      ansible.builtin.apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: Install docker-compose
+      ansible.builtin.apt:
+        name: docker-compose
+        state: latest
+        update_cache: true
+
+    - name: Create deployment directory
+      file:
+        path: "{{ deploy_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Copy docker-compose.yml to target
+      copy:
+        src: ../../docker-compose.yml
+        dest: "{{ deploy_dir }}/docker-compose.yml"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Copy Prometheus configuration file to target
+      copy:
+        src: ../../prometheus.yml
+        dest: "{{ deploy_dir }}/prometheus.yml"
+        owner: root
+        group: root
+        mode: '0644'
 
     - name: Log into Azure Container Registry
       shell: >
@@ -38,17 +90,9 @@
       register: acr_login_result
       changed_when: "'Login Succeeded' not in acr_login_result.stdout"
 
-    - name: Pull the filevault-app image
-      docker_image:
-        name: "{{ acr_login_server }}/{{ container_name }}"
-        tag: "latest"
-        source: pull
-
-    - name: Run filevault-app container
-      docker_container:
-        name: "{{ container_name }}"
-        image: "{{ acr_login_server }}/{{ container_name }}:latest"
-        state: started
-        restart_policy: always
-        ports:
-          - "{{ host_port }}:{{ container_port }}"
+    - name: Launch docker compose
+      ansible.builtin.command: docker compose up -d
+      args:
+        chdir: "{{ deploy_dir }}"
+      environment:
+        DOCKER_HOST: "unix:///var/run/docker.sock"

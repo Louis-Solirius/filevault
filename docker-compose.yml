@@ -1,13 +1,32 @@
 services:
   app:
-    image: filevault-app-clean
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
+    image: lwweaponofchoicecr.azurecr.io/filevault-app-clean:latest # <- Built from Dockerfile and pushed to ACR
     volumes:
       - .:/src/azure-sa
     container_name: nodejs
     restart: always
     ports:
-      - "3000:3000"
+      - "8080:3000"
     command: npm start
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3001:3000"
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
