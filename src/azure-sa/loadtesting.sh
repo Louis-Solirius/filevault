@@ -1,0 +1,1 @@
+locust -f locust.py --host https://filevault.lwhomelab.co.uk/ --users 500 --spawn-rate 20

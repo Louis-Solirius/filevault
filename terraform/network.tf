@@ -135,7 +135,7 @@ resource "azurerm_lb_rule" "app_lb_rule" {
   name                           = "app-lb-rule"
   loadbalancer_id                = azurerm_lb.vmss_lb.id
   protocol                       = "Tcp"
-  frontend_port                  = 80
+  frontend_port                  = 443
   backend_port                   = 8080
   frontend_ip_configuration_name = "PublicIPAddress"
   backend_address_pool_ids        = [
