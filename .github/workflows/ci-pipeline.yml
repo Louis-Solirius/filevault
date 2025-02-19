@@ -96,6 +96,6 @@ jobs:
           directory: ansible
           inventory: |
             [filevault-app-servers]
-            ansible_host=${{ secrets.ANSIBLE_HOST }} ansible_port=${{ secrets.ANSIBLE_PORT }} ansible_user=${{ secrects.ANSIBLE_USER }}
+            ansible_host=${{ secrets.ANSIBLE_HOST }} ansible_port=${{ secrets.ANSIBLE_PORT }} ansible_user=${{ secrets.ANSIBLE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
