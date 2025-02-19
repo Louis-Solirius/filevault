@@ -93,7 +93,6 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v3
         with:
           playbook: ansible/playbooks/filevault-docker-setup.yml
-#          directory: ansible
           inventory: |
             [filevault-app-servers]
             ansible_host=${{ secrets.ANSIBLE_HOST }} ansible_port=${{ secrets.ANSIBLE_PORT }} ansible_user=${{ secrets.ANSIBLE_USER }}

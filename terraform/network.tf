@@ -23,23 +23,23 @@ resource "azurerm_network_security_group" "vm_nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
-    source_address_prefix      = var.trusted_ip
+    source_address_prefix      = "*"
     source_port_range          = "*"
     destination_address_prefix = "*"
     destination_port_range     = "22"
   }
 
-  security_rule {
-    name                       = "ssh-allow2"
-    priority                   = 1002
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_address_prefix      = var.trusted_ip2
-    source_port_range          = "*"
-    destination_address_prefix = "*"
-    destination_port_range     = "22"
-  }
+  # security_rule {
+  #   name                       = "ssh-allow2"
+  #   priority                   = 1002
+  #   direction                  = "Inbound"
+  #   access                     = "Allow"
+  #   protocol                   = "Tcp"
+  #   source_address_prefix      = var.trusted_ip2
+  #   source_port_range          = "*"
+  #   destination_address_prefix = "*"
+  #   destination_port_range     = "22"
+  # }
 
   security_rule {
     name                       = "8080-allow"
