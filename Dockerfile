@@ -7,7 +7,7 @@ USER nonroot
 
 RUN id
 
-WORKDIR /
+WORKDIR /app
 
 COPY --chown=nonroot:nonroot --chmod=755 package*.json ./
 
