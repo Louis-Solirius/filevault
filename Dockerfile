@@ -15,8 +15,6 @@ RUN npm install --ignore-scripts
 
 COPY --chown=root:root --chmod=755 ./src ./src
 
-COPY .env ./
-
 EXPOSE 3000
 
 CMD ["npm", "start"]

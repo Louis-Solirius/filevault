@@ -66,8 +66,8 @@
         group: root
         mode: '0755'
 
-    - name: Copy docker-compose.yml to target
-      copy:
+    - name: Template docker-compose file to target
+      template:
         src: ../../docker-compose.yml
         dest: "{{ deploy_dir }}/docker-compose.yml"
         owner: root
