@@ -110,5 +110,5 @@ jobs:
           inventory: |
             [filevault-app-servers]
             localhost ansible_port=2222 ansible_user=${{ secrets.ANSIBLE_USER }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-          key: ~/.ssh/temp_key
+          key: ~/.ssh/id_rsa
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
