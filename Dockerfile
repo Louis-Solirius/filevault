@@ -7,15 +7,15 @@ USER nonroot
 
 RUN id
 
-RUN mkdir -p /app
-
 WORKDIR /app
 
 COPY --chown=nonroot:nonroot --chmod=755 package*.json ./
 
 RUN npm install --ignore-scripts
 
-COPY --chown=root:root --chmod=755 ./src ./
+COPY --chown=root:root --chmod=755 ./src ./src
+
+COPY .env ./
 
 EXPOSE 3000
 

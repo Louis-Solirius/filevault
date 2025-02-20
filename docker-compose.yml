@@ -2,7 +2,7 @@ services:
   app:
     image: lwweaponofchoicecr.azurecr.io/filevault-app-clean:latest # <- Built from Dockerfile and pushed to ACR
     volumes:
-      - .:/src/azure-sa
+      - ./src:/src
     container_name: nodejs
     restart: always
     ports:
