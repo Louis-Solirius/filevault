@@ -97,6 +97,7 @@ jobs:
             --target-resource-id $(az vmss show --name example-vmss/virtualMachines/0 --resource-group lw-weaponofchoice-rg --query id -o tsv) \
             --resource-port 22 \
             --port 2222 &
+          sleep 10
         shell: bash
 
       - name: Run Ansible Playbook
