@@ -90,8 +90,15 @@
       register: acr_login_result
       changed_when: "'Login Succeeded' not in acr_login_result.stdout"
 
+    - name: Pull latest image
+      ansible.builtin.command: docker compose pull
+      args:
+        chdir: "{{ deploy_dir }}"
+      environment:
+        DOCKER_HOST: "unix:///var/run/docker.sock"
+
     - name: Launch docker compose
-      ansible.builtin.command: docker compose pull && docker compose up -d
+      ansible.builtin.command: docker compose up -d
       args:
         chdir: "{{ deploy_dir }}"
       environment:
