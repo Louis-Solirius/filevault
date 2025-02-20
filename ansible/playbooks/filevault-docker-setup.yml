@@ -97,6 +97,22 @@
       environment:
         DOCKER_HOST: "unix:///var/run/docker.sock"
 
+    - name: Download CloudFlare Tunnel package
+      ansible.builtin.get_url:
+        url: "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb"
+        dest: "/tmp/cloudflared.deb"
+        mode: '0644'
+
+    - name: Install CloudFlare Tunnel package
+      ansible.builtin.apt:
+        deb: "/tmp/cloudflared.deb"
+        state: present
+
+    - name: Install CloudFlare Tunnel service
+      ansible.builtin.shell: "cloudflared service install {{ cloudflared_token }}"
+      args:
+        creates: "/etc/systemd/system/cloudflared.service"
+
     - name: Launch docker compose
       ansible.builtin.command: docker compose up -d
       args:
