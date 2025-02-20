@@ -92,8 +92,8 @@ jobs:
       - name: Setup SSH Key File
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/temp_key
-          chmod 600 ~/.ssh/temp_key
+          printf "%s" "${{ secrets.SSH_PRIVATE_KEY_FILE }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
       - name: Azure Login
         uses: azure/login@v1
