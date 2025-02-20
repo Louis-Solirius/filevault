@@ -91,7 +91,7 @@
       changed_when: "'Login Succeeded' not in acr_login_result.stdout"
 
     - name: Launch docker compose
-      ansible.builtin.command: docker compose up -d
+      ansible.builtin.command: docker compose pull && docker compose up -d
       args:
         chdir: "{{ deploy_dir }}"
       environment:
