@@ -105,6 +105,6 @@ jobs:
           playbook: ansible/playbooks/filevault-docker-setup.yml
           inventory: |
             [filevault-app-servers]
-            ansible_host=127.0.0.1 ansible_port=2222 ansible_user=${{ secrets.ANSIBLE_USER }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+            127.0.0.1 ansible_port=2222 ansible_user=${{ secrets.ANSIBLE_USER }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
