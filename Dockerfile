@@ -17,4 +17,4 @@ COPY --chown=root:root --chmod=755 ./src ./
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["node", "/app/src/azure-sa/index.js"]
