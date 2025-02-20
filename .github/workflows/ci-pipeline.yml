@@ -95,19 +95,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Create Bastion Tunnel
-        run: |
-          az extension add --name bastion
-          nohup az network bastion tunnel \
-            --name example-bastion \
-            --resource-group lw-weaponofchoice-rg \
-            --target-resource-id $(az vmss show --name example-vmss/virtualMachines/0 --resource-group lw-weaponofchoice-rg --query id -o tsv) \
-            --resource-port 22 \
-            --port 2222
-        shell: bash
-
-#      - name: SSH into VM test
-#        run: |
-#          ssh -o "StrictHostKeyChecking=no" -p 2222 ${{ secrets.ANSIBLE_USER }}@localhost "echo 'Connected via Bastion Tunnel'"
+        run: bash scripts/createBastionTunnel.sh "${{ secrets.BASTION_NAME }}" "${{ secrets.RESOURCE_GROUP }}" "${{ secrets.TARGET_RESOURCE_ID }}"
 
       - name: Run Ansible Playbook
         uses: dawidd6/action-ansible-playbook@v3
