@@ -7,6 +7,8 @@ USER nonroot
 
 RUN id
 
+RUN mkdir -p /app
+
 WORKDIR /app
 
 COPY --chown=nonroot:nonroot --chmod=755 package*.json ./
@@ -17,4 +19,4 @@ COPY --chown=root:root --chmod=755 ./src ./
 
 EXPOSE 3000
 
-CMD ["node", "/app/src/azure-sa/index.js"]
+CMD ["npm", "start"]
