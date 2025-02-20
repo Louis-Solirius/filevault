@@ -12,15 +12,3 @@ variable "vm_size" {
   type    = string
   default = "Standard_B2s"
 }
-
-variable "trusted_ip" {
-  type      = string
-  sensitive = true
-  description = "Public IP address (with /32) allowed to SSH in."
-}
-
-variable "trusted_ip2" {
-  type      = string
-  sensitive = true
-  description = "Public IP address (with /32) allowed to SSH in."
-}
