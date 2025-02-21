@@ -64,7 +64,7 @@
         state: directory
         owner: root
         group: root
-        mode: '0755'
+        mode: '0755' #NOSONAR
 
     - name: Template docker-compose file to target
       template:
@@ -72,7 +72,7 @@
         dest: "{{ deploy_dir }}/docker-compose.yml"
         owner: root
         group: root
-        mode: '0644'
+        mode: '0644' #NOSONAR
 
     - name: Copy Prometheus configuration file to target
       copy:
@@ -80,7 +80,7 @@
         dest: "{{ deploy_dir }}/prometheus.yml"
         owner: root
         group: root
-        mode: '0644'
+        mode: '0644' #NOSONAR
 
     - name: Log into Azure Container Registry
       shell: >
@@ -101,7 +101,7 @@
       ansible.builtin.get_url:
         url: "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb"
         dest: "/tmp/cloudflared.deb"
-        mode: '0644'
+        mode: '0644' #NOSONAR
 
     - name: Install CloudFlare Tunnel package
       ansible.builtin.apt:

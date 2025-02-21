@@ -9,7 +9,7 @@ RUN id
 
 WORKDIR /app
 
-COPY --chown=nonroot:nonroot --chmod=755 package*.json ./
+COPY --chown=root:root --chmod=755 package*.json ./
 
 RUN npm install --ignore-scripts
 

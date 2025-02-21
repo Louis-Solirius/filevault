@@ -42,13 +42,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
       name      = "internal"
       subnet_id = azurerm_subnet.subnet.id
       primary   = true
-
-      # load_balancer_backend_address_pool_ids = [
-      #   azurerm_lb_backend_address_pool.vmss_backend_pool.id,
-      # ]
-      # load_balancer_inbound_nat_rules_ids = [
-      #   azurerm_lb_nat_pool.vmss_nat_pool.id,
-      # ]
     }
 
     network_security_group_id = azurerm_network_security_group.vm_nsg.id
