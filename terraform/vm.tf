@@ -12,12 +12,12 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
 
   admin_ssh_key {
     username   = var.vm_admin_username
-    public_key = file("~/.ssh/id_ed25519.pub")
+    public_key = var.ed25519_public_key
   }
 
   admin_ssh_key {
     username   = var.vm_admin_username
-    public_key = file("~/.ssh/id_ed25519_2.pub")
+    public_key = var.ed25519_2_public_key
   }
 
   disable_password_authentication = true

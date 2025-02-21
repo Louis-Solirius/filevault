@@ -1,15 +1,10 @@
 name: CI Pipeline
 
 env:
-  AZURE_WEBAPP_NAME: louisw-fault-vault-web-app
-  ACR_NAME: lwweaponofchoicecr
   ACR_LOGIN_SERVER: lwweaponofchoicecr.azurecr.io
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -21,8 +16,8 @@ jobs:
     name: Lint Code
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -40,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
