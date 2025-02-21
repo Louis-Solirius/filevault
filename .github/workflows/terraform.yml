@@ -19,7 +19,7 @@ permissions:
 jobs:
   terraform:
     name: "Terraform Infrastructure Change Management"
-    environment: development
+    environment: Development
     runs-on: ubuntu-latest
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
