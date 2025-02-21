@@ -24,6 +24,11 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v3
         with:
