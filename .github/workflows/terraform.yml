@@ -29,9 +29,6 @@ jobs:
         with:
           terraform_version: 'latest'
 
-      - name: Change to Terraform directory
-
-
       - name: Terraform init
         id: init
         working-directory: /terraform
