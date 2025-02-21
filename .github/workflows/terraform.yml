@@ -12,6 +12,9 @@ on:
     paths:
       - terraform/**
 
+permissions:
+  pull-requests: write
+
 jobs:
   terraform:
     name: "Terraform Infrastructure Change Management"
