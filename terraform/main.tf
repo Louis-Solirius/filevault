@@ -12,6 +12,7 @@ terraform {
     storage_account_name = "tftstateaccount"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
+    use_oidc             = true
   }
 }
 
@@ -19,6 +20,7 @@ provider "azurerm" {
   features {}
 
   subscription_id = "c3c359ea-23a0-4696-9b8a-2d92aafdd97c"
+  use_oidc        = true
 }
 
 resource "azurerm_resource_group" "rg" {
